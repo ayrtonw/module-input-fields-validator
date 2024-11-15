@@ -57,7 +57,7 @@ abstract class AbstractInputFieldsValidator
         }
 
         // Disallowed characters
-        if (preg_match($this->configurations->getRegEx(), $input)) {
+        if (preg_match($this->configurations->getRegEx(), (string)$input)) {
             throw new InputException(__("Invalid characters in $fieldName."));
         }
 

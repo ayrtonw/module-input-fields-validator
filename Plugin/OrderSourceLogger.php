@@ -54,11 +54,10 @@ class OrderSourceLogger extends AbstractInputFieldsValidator
                     $this->validateInput($billingAddress->getStreetLine(1), 'Billing Street Address');
                     // Validate State/Region for billing address
                     if ($this->configurations->isRegionValidationEnabled()) {
-                        $billingRegion = $billingAddress->getRegion();
-                        if ($billingRegion) {
-                            $this->validateInput($billingRegion->getRegion(), 'Billing State/Region Name');
-                            $this->validateInput($billingRegion->getRegionCode(), 'Billing State/Region Code');
-                            $this->validateInput($billingRegion->getRegionId(), 'Billing State/Region ID');
+                        if ($billingRegion = $billingAddress->getRegion()) {
+                            $this->validateInput($billingRegion, 'Billing State/Region Name');
+                            $this->validateInput($billingAddress->getRegionCode(), 'Billing State/Region Code');
+                            $this->validateInput($billingAddress->getRegionId(), 'Billing State/Region ID');
                         }
                     }
                 }
@@ -72,13 +71,12 @@ class OrderSourceLogger extends AbstractInputFieldsValidator
                     $this->validateInput($shippingAddress->getStreetLine(1), 'Shipping Street Address');
                     // Validate State/Region for shipping address
                     if ($this->configurations->isRegionValidationEnabled()) {
-                        $shippingRegion = $shippingAddress->getRegion();
-                        if ($shippingRegion) {
-                            $this->validateInput($shippingRegion->getRegion(), 'Shipping State/Region Name');
+                        if ($shippingRegion = $shippingAddress->getRegion()) {
+                            $this->validateInput($shippingRegion, 'Shipping State/Region Name');
                             $this->validateInput(
-                                $shippingRegion->getRegionCode(), 'Shipping State/Region Code'
+                                $shippingAddress->getRegionCode(), 'Shipping State/Region Code'
                             );
-                            $this->validateInput($shippingRegion->getRegionId(), 'Shipping State/Region ID');
+                            $this->validateInput($shippingAddress->getRegionId(), 'Shipping State/Region ID');
                         }
                     }
                 }
